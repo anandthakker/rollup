@@ -146,9 +146,10 @@ export default class Chunk {
 		}
 
 		let i = 0;
-		safeExportName = exportName;
+		const baseExportName = exportName === '*' ? '_namespace' : exportName;
+		safeExportName = baseExportName;
 		while (this.exports[safeExportName]) {
-			safeExportName = exportName + '$' + ++i;
+			safeExportName = baseExportName + '$' + ++i;
 		}
 		variable.exportName = safeExportName;
 
